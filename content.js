@@ -17,4 +17,18 @@
 // // none 
 
 // //front end : 
+console.log("Content script loaded!");
+
+// Function to apply styles dynamically
+function applyStyle(setting, value) {
+    document.body.style[setting] = value;
+}
+
+// Listen for messages from popup.js
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "updateStyle") {
+        applyStyle(request.setting, request.value);
+    }
+});
+
 
